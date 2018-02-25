@@ -1,10 +1,15 @@
 __author__ = 'Dario Hermida'
+
 import numpy as np
 from scipy.optimize import leastsq
 from scipy.optimize import curve_fit
 import pylab as plt
 import math
-import random
+import measurements
+
+# read the input measurements
+X_mm = measurements.X_mm
+MP_inertia = measurements.MP_inertia
 
 # basic, plots, final_plots
 debug = 'final_plots'
@@ -17,16 +22,6 @@ t = np.linspace(200, 800, 100)
 cog_compilation = []
 R2_compilation = []
 params_compilation = []
-
-X_mm = [634.028, 610.93, 587.741, 564.626, 541.506,
-        518.378, 495.192, 472.091, 448.88, 425.596,
-        402.45, 379.32, 356.129, 332.993, 309.825,
-        286.633, 263.495, 240.299, 217.181, 194.035]
-# generate data measurements to be fitted
-MP_inertia = [1375.3, 1364.1, 1350.3, 1339.8, 1328.1,
-              1321.5, 1311.1, 1305.7, 1298.6, 1296.4,
-              1292.7, 1293.9, 1293.5, 1291.3, 1300.6,
-              1301.1, 1308.1, 1313.6, 1324.1, 1333.5]
 
 def optimize_func(t, a, b, c):
     return a * t ** 2 + b * t + c
